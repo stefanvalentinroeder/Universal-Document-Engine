@@ -2,12 +2,12 @@
 
 ## Reporting a vulnerability
 
-Do not open a public issue. Contact `[SECURITY CONTACT]` through the private channel
+Do not open a public issue. Contact `stefan.valentin.roeder@gmail.com` through the private channel
 designated by the repository owner. Include the affected version, reproduction
 steps, impact, and any safe mitigation you identified. Do not include real client
 or personal data.
 
-The repository owner must replace `[SECURITY CONTACT]` before inviting external
+The repository owner must replace `stefan.valentin.roeder@gmail.com` before inviting external
 contributors.
 
 ## Supported versions
