@@ -199,6 +199,15 @@ try {
   compose(['up', '-d', '--wait', '--wait-timeout', '120', 'postgres', 'minio']);
   run('uv', ['run', 'alembic', '-c', 'apps/api/alembic.ini', 'upgrade', 'head']);
   run('uv', ['run', 'pytest', '-m', 'integration', 'tests/integration']);
+  run('uv', [
+    'run',
+    'alembic',
+    '-c',
+    'apps/api/alembic.ini',
+    'downgrade',
+    '20260804_0001',
+  ]);
+  run('uv', ['run', 'alembic', '-c', 'apps/api/alembic.ini', 'upgrade', 'head']);
 
   apiLogDescriptor = openSync(apiLogPath, 'a');
   apiProcess = spawn(

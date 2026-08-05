@@ -28,7 +28,8 @@ class Database:
     @asynccontextmanager
     async def session(self) -> AsyncIterator[AsyncSession]:
         async with self._session_factory() as session:
-            yield session
+            async with session.begin():
+                yield session
 
     async def close(self) -> None:
         await self.engine.dispose()
