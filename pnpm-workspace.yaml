@@ -1,0 +1,7 @@
+packages:
+  - apps/web
+  - apps/admin
+  - libs/frontend/*
+allowBuilds:
+  nx: true
+  sharp: true

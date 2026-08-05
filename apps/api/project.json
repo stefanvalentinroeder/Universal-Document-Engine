@@ -1,0 +1,41 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/api/ude_api",
+  "implicitDependencies": ["backend-core", "backend-db", "backend-tenancy"],
+  "tags": ["scope:backend", "type:application"],
+  "targets": {
+    "dev": {
+      "executor": "nx:run-commands",
+      "continuous": true,
+      "cache": false,
+      "options": {
+        "command": "uv run uvicorn ude_api.main:create_app --factory --app-dir apps/api --host 127.0.0.1 --port 8000 --reload"
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist"],
+      "options": {
+        "command": "uv build"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "uv run ruff check apps/api libs/backend libs/engine tests",
+          "uv run mypy"
+        ],
+        "parallel": false
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run pytest -m \"not integration\""
+      }
+    }
+  }
+}
