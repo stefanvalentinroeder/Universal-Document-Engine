@@ -1,0 +1,7 @@
+{
+  "name": "backend-db",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/backend/db/src",
+  "tags": ["scope:backend", "type:data-access"]
+}
