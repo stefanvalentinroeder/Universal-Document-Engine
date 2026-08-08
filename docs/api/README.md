@@ -55,3 +55,13 @@ preserved; otherwise the API generates one. Error responses use this shape:
 The `/api/v1` router is registered but intentionally contains no business route.
 When application endpoints are approved, OpenAPI will become the only contract
 source for a generated client under `libs/frontend/api-client`.
+
+## Persistence boundary
+
+The API currently exposes no domain CRUD routes. Its database metadata is defined
+by `ude_backend_db.models`, while API schemas will remain separate from ORM models
+when endpoints are approved. The `Database.session()` boundary opens one async
+SQLAlchemy transaction per use; it commits on success and rolls back on error.
+The persistent core model, its tenant constraints, immutable version guarantees,
+and deferred RLS decision are documented in
+`docs/architecture/CORE_DOMAIN_MODEL.md`.

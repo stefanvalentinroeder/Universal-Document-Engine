@@ -119,8 +119,12 @@ smoke checks for `/health`, `/ready`, and `/openapi.json` through
 Every future tenant-owned call requires a verified `TenantContext`; every future
 tenant-owned table requires an immutable, non-null tenant key. There is no implicit
 default tenant. Database-level isolation and explicit cross-tenant tests are
-required before tenant data is admitted. The complete baseline is documented in
-`docs/architecture/MULTI_TENANCY.md`.
+required before tenant data is admitted. The core schema enforces tenant-scoped
+foreign keys and uniqueness constraints, but RLS remains deliberately deferred
+until authenticated request, service, and background-job identities have an
+approved design. The complete baseline is documented in
+`docs/architecture/MULTI_TENANCY.md` and the active schema is documented in
+`docs/architecture/CORE_DOMAIN_MODEL.md`.
 
 ## Rule engine and AI separation
 
@@ -136,3 +140,9 @@ Every legally relevant output remains a draft until an authorized human reviews
 the source evidence, validations, deterministic decisions, and rendered result and
 then explicitly approves it. The system must preserve that review status and may
 not describe an unreviewed artifact as final.
+
+The initial `ReviewTask` persistence model remains separate from `ProcessingRun`.
+It represents review work without adding review policy or processing behavior to
+the engine. Document and rule-set versions are immutable at both the SQLAlchemy
+and PostgreSQL layers; creating a replacement revision is the only permitted
+change path.

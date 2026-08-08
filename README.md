@@ -129,10 +129,12 @@ Create a reviewed migration after intentionally changing SQLAlchemy metadata:
 pnpm db:revision -- -m "describe the schema change"
 ```
 
-The initial baseline contains no business table. Every future tenant-owned table
-must include mandatory tenant scoping and database-enforced isolation where the
-approved database design supports it. See
-`docs/architecture/MULTI_TENANCY.md` before adding schema objects.
+The core-domain migration creates tenant, user, membership, document,
+document-version, processing-run, rule-set, rule-set-version, review-task, and
+audit-event tables. The integration workflow verifies a clean upgrade, downgrade
+to the baseline, and repeat upgrade on isolated PostgreSQL volumes. See
+`docs/architecture/CORE_DOMAIN_MODEL.md` and
+`docs/architecture/MULTI_TENANCY.md` before changing the schema.
 
 ## API and contracts
 
