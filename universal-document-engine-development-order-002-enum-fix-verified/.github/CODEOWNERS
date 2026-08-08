@@ -1,8 +1,0 @@
-# Replace this placeholder with the actual repository owner or owning GitHub team.
-* @replace-with-repository-owner
-
-# Security-sensitive and architectural areas remain explicitly owned.
-/.github/ @replace-with-repository-owner
-/apps/api/ @replace-with-repository-owner
-/docs/adr/ @replace-with-repository-owner
-/infra/ @replace-with-repository-owner
